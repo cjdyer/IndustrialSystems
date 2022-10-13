@@ -94,6 +94,8 @@ void NeuralNetwork::train_model(const std::vector<Img> &imgs, uint16_t epochs, u
 {
 	m_learning_rate = learning_rate;
 	m_batch_size = batch_size;
+	train_batch_imgs(imgs);
+	return;
 		
 	std::vector<std::vector<Img>> bunches;
 	if (batch_size == 0)
@@ -129,8 +131,8 @@ double NeuralNetwork::predict_batch_imgs(const std::vector<Img> &imgs)
 		cur_img.img_data.flatten(true);
 		Matrix prediction = predict(cur_img.img_data);
 
-		// std::cout << "0 - " << prediction.m_entries[0][0] << " | 1 - " << prediction.m_entries[1][0]
-		// 		  << " | argmax - " << prediction.max_value() << " | result - " << cur_img.label << std::endl;
+		std::cout << "0 - " << prediction.m_entries[0][0] << " | 1 - " << prediction.m_entries[1][0]
+				  << " | argmax - " << prediction.max_value() << " | result - " << cur_img.label << std::endl;
 		n_correct += prediction.max_value() == cur_img.label;
 	}
 	return 1.0 * n_correct / imgs.size();

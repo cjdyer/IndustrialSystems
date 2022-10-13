@@ -26,9 +26,9 @@ using preprocess::image_t;
 using preprocess::PartType;
 
 // #define PROCESSING
-// #define TRAINING
-#define TUNING
-// #define TESTING
+#define TRAINING
+// #define TUNING
+#define TESTING
 
 const char *files[] = {
 	"../data/processed images/training_data.csv",
@@ -123,8 +123,8 @@ int main(int argc, char *argv[])
 	srand(42);
 
 	std::vector<Img> imgs = load_csv(files[0]);
-	NeuralNetwork net = NeuralNetwork(81, 200, 2);
-	net.train_model(imgs, 10, 0, 0.1);
+	NeuralNetwork net = NeuralNetwork(64, 200, 2);
+	net.train_model(imgs, 60, 1, 0.15);
 	// net.save("../data/network");
 #endif
 
